@@ -1,5 +1,5 @@
 <?php
-    function print_title() {    // url의 id값을 확인 
+    function print_title() {
         if(isset($_GET['id'])) {
             echo $_GET['id'];
         } else {
@@ -7,7 +7,7 @@
         }
     }
 
-    function print_description() { // file_get_contents를 활용한 데이터 값 불러오기
+    function print_description() {
         if(isset($_GET['id'])) {
             echo file_get_contents("../data/".$_GET['id']);
         } else {
@@ -15,7 +15,7 @@
         }
     }
 
-    function print_list($list) { // php 파일 목록 불러오기 
+    function print_list($list) {
         for($i=0; $i<count($list); $i++) {
             if($list[$i] != '.') {
                 if($list[$i] != '..') {
@@ -25,7 +25,7 @@
         }
     }
 
-    function print_list_id($list) { // id값 지정하기
+    function print_list_id($list) {
         for($i=0; $i<count($list); $i++) {
             if($list[$i] != '.') {
                 if($list[$i] != '..') {
@@ -53,20 +53,19 @@
             print_list_id($list);
         ?>
     </ol>
-    <a href="09create.php">create</a>  <!-- form을 이용한 create -->
-    <?php if(isset($_GET['id'])) { ?>  <!-- form을 이용한 update -->
-        <a href="10update.php?id=<?=$_GET['id']?>">update</a> 
-    <?php } ?>
-    <h2>
-        <?php // print_title();
-            print_title();
-        ?>
-    </h2>
-    <?php // print_description();
-        print_description();
-        $study = scandir("../php");
-        print_list($study);
-    ?>
+    <a href="create.php">create</a>
+    <form action="09create_process(redirect).php" method="post">
+        <p>
+            <input type="text" name="title" placeholder="Title">
+        </p>
+        <p>
+            <textarea name="description" placeholder="Description">
+            </textarea>
+        </p>
+        <p>
+            <input type="submit">
+        </p>
+    </form>
 
 </body>
 </html>
