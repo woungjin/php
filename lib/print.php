@@ -9,7 +9,7 @@
 
     function print_description() { // file_get_contents를 활용한 데이터 값 불러오기
         if(isset($_GET['id'])) {
-            echo file_get_contents("../data/".$_GET['id']);
+            echo htmlspecialchars(file_get_contents("../data/".$_GET['id'])); // htmlspecialchars를 활용하여 해킹의 위험성을 낮추어야한다
         } else {
             echo "WELCOME";
         }
@@ -27,9 +27,10 @@
 
     function print_list_id($list) { // id값 지정하기
         for($i=0; $i<count($list); $i++) {
-            if($list[$i] != '.') {
-                if($list[$i] != '..') {
-                    echo "<li><a href=\"index.php?id=$list[$i]\">$list[$i]</a></li>\n";
+            $a = htmlspecialchars($list[$i]);
+            if($a != '.') {
+                if($a != '..') {
+                    echo "<li><a href=\"index.php?id=$a\">$a</a></li>\n";
                 }
             }
         }
