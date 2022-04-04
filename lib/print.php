@@ -9,7 +9,8 @@
 
     function print_description() { // file_get_contents를 활용한 데이터 값 불러오기
         if(isset($_GET['id'])) {
-            echo htmlspecialchars(file_get_contents("../data/".$_GET['id'])); // htmlspecialchars를 활용하여 해킹의 위험성을 낮추어야한다
+            $basename = basename($_GET['id']); // basename()을 활용하여 url의 파일경로의 보안성을 높여야한다
+            echo htmlspecialchars(file_get_contents("../data/".$basename)); // htmlspecialchars를 활용하여 해킹의 위험성을 낮추어야한다
         } else {
             echo "WELCOME";
         }
